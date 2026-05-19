@@ -1,8 +1,58 @@
 {
   "books": [
     {
-      "id": 1
-      "titre": ""
+      "id": 1,
+      "titre": "1984",
+      "auteur": "George Orwell",
+      "genre": "Science-fiction",
+      "description": "Roman dystopique.",
+      "couverture": "https://picsum.photos/200/300?1",
+      "aLire": false
+    },
+    {
+      "id": 2,
+      "titre": "Le Petit Prince",
+      "auteur": "Antoine de Saint-Exupéry",
+      "genre": "Classique",
+      "description": "Livre philosophique.",
+      "couverture": "https://picsum.photos/200/300?2",
+      "aLire": true
+    },
+    {
+      "id": 3,
+      "titre": "Harry Potter",
+      "auteur": "J.K Rowling",
+      "genre": "Fantasy",
+      "description": "Magie et aventure.",
+      "couverture": "https://picsum.photos/200/300?3",
+      "aLire": false
+    },
+    {
+      "id": 4,
+      "titre": "Dune",
+      "auteur": "Frank Herbert",
+      "genre": "Science-fiction",
+      "description": "Planète désertique.",
+      "couverture": "https://picsum.photos/200/300?4",
+      "aLire": false
+    },
+    {
+      "id": 5,
+      "titre": "Hamlet",
+      "auteur": "Shakespeare",
+      "genre": "Drame",
+      "description": "Tragédie classique.",
+      "couverture": "https://picsum.photos/200/300?5",
+      "aLire": false
+    },
+    {
+      "id": 6,
+      "titre": "Le Seigneur des Anneaux",
+      "auteur": "Tolkien",
+      "genre": "Fantasy",
+      "description": "Aventure épique.",
+      "couverture": "https://picsum.photos/200/300?6",
+      "aLire": true
     }
   ]
 }
