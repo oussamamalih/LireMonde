@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>LireMonde - Découverte de Livres</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fa-solid fa-book-open"></i>
+        <h2>ReadSphere</h2>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" class="active"> Accueil </a>
+        </li>
+
+        <li>
+          <a href="alire.html"> À lire </a>
+        </li>
+
+        <li>
+          <a href="admin.html"> Admin </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Découvrez Votre <span>Prochaine Lecture</span></h1>
+
+        <p>
+          Explorez des centaines de livres dynamiques, ajoutez vos favoris et
+          gérez votre liste de lecture.
+        </p>
+
+        <button class="hero-btn">Explorer les livres</button>
+      </div>
+    </section>
+
+    <!-- ================= SEARCH + FILTER ================= -->
+
+    <section class="controls">
+      <!-- Search -->
+
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher un livre..."
+        />
+      </div>
+
+      <!-- Dynamic Filters -->
+
+      <div id="filters" class="filters">
+        <!-- JS GENERATED -->
+      </div>
+    </section>
+
+    <!-- ================= BOOKS SECTION ================= -->
+
+    <main class="books-section">
+      <div class="section-title">
+        <h2>Nos Livres</h2>
+
+        <p>Tous les livres sont chargés dynamiquement depuis une API REST.</p>
+      </div>
+
+      <!-- Dynamic Cards -->
+
+      <div id="books-container" class="books-container">
+        <!-- JS GENERATED -->
+      </div>
+    </main>
+
+    <!-- ================= MODAL ================= -->
+
+    <div id="bookModal" class="modal">
+      <div class="modal-content">
+        <!-- CLOSE -->
+
+        <span class="close-btn" id="closeModal"> &times; </span>
+
+        <!-- DYNAMIC CONTENT -->
+
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- ================= LOADING ================= -->
+
+    <div id="loader" class="loader-container hidden">
+      <div class="loader"></div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+      <div class="footer-content">
+        <h3>ReadSphere</h3>
+
+        <p>Plateforme interactive de gestion et découverte de livres.</p>
+
+        <div class="footer-icons">
+          <i class="fa-brands fa-facebook"></i>
+
+          <i class="fa-brands fa-instagram"></i>
+
+          <i class="fa-brands fa-github"></i>
+
+          <i class="fa-brands fa-linkedin"></i>
+        </div>
+
+        <small> © 2026 ReadSphere - Tous droits réservés </small>
+      </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
