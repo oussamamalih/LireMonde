@@ -1,109 +1,127 @@
+/* ============================
+   ReadSphere - API Functions
+   Base URL: http://localhost:3000/books
+   ============================ */
+
 const API_URL = "http://localhost:3000/books";
 
-async function getBooks() {
+// GET all books
+async function getAllBooks() {
   try {
     const response = await fetch(API_URL);
-
-    const books = await response.json();
-
-    return books;
+    if (!response.ok) throw new Error("Failed to fetch books");
+    return await response.json();
   } catch (error) {
-    console.log("Error :", error);
+    console.error("Error fetching books:", error);
+    showToast("Failed to load books", "error");
+    return [];
   }
 }
 
-async function getBook(id) {
+// GET book by ID
+async function getBookById(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`);
-
-    const book = await response.json();
-
-    return book;
+    if (!response.ok) throw new Error("Failed to fetch book");
+    return await response.json();
   } catch (error) {
-    console.log("Error :", error);
+    console.error("Error fetching book:", error);
+    showToast("Failed to load book details", "error");
+    return null;
   }
 }
 
-async function addBook(bookData) {
+// POST new book
+async function addBook(book) {
   try {
-    await fetch(API_URL, {
+    const response = await fetch(API_URL, {
       method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(bookData),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(book),
     });
+    if (!response.ok) throw new Error("Failed to add book");
+    showToast("Book added successfully!", "success");
+    return await response.json();
   } catch (error) {
-    console.log("Error :", error);
+    console.error("Error adding book:", error);
+    showToast("Failed to add book", "error");
+    return null;
   }
 }
 
+// DELETE book
 async function deleteBook(id) {
   try {
-    await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     });
+    if (!response.ok) throw new Error("Failed to delete book");
+    showToast("Book deleted successfully!", "success");
+    return true;
   } catch (error) {
-    console.log("Error :", error);
+    console.error("Error deleting book:", error);
+    showToast("Failed to delete book", "error");
+    return false;
   }
 }
 
-async function updateBook(id, updatedData) {
+// PATCH toggle aLire status
+async function toggleALire(id, currentStatus) {
   try {
-    await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(updatedData),
-    });
-  } catch (error) {
-    console.log("Error :", error);
-  }
-}
-
-async function toggleRead(id, currentValue) {
-  try {
-    await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "PATCH",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        aLire: !currentValue,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ aLire: !currentStatus }),
     });
+    if (!response.ok) throw new Error("Failed to update reading list");
+    const updated = await response.json();
+    const message = updated.aLire
+      ? "Added to reading list!"
+      : "Removed from reading list!";
+    showToast(message, "success");
+    return updated;
   } catch (error) {
-    console.log("Error :", error);
+    console.error("Error toggling aLire:", error);
+    showToast("Failed to update reading list", "error");
+    return null;
   }
 }
 
-async function searchBooks(keyword) {
+// PUT update full book (for admin edit)
+async function updateBook(id, bookData) {
   try {
-    const response = await fetch(`${API_URL}?q=${keyword}`);
-
-    const books = await response.json();
-
-    return books;
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bookData),
+    });
+    if (!response.ok) throw new Error("Failed to update book");
+    showToast("Book updated successfully!", "success");
+    return await response.json();
   } catch (error) {
-    console.log("Error :", error);
+    console.error("Error updating book:", error);
+    showToast("Failed to update book", "error");
+    return null;
   }
 }
 
-async function filterBooks(genre) {
-  try {
-    const response = await fetch(`${API_URL}?genre=${genre}`);
+// Toast notification helper
+function showToast(message, type = "success") {
+  const existing = document.querySelector(".toast");
+  if (existing) existing.remove();
 
-    const books = await response.json();
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
 
-    return books;
-  } catch (error) {
-    console.log("Error :", error);
-  }
+  // Trigger animation
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
 }

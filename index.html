@@ -1,148 +1,66 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>LireMonde - Découverte de Livres</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-
+    <title>ReadSphere - Discover Books</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
-
   <body>
-    <!-- ================= NAVBAR ================= -->
-
+    <!-- Navbar -->
     <nav class="navbar">
-      <div class="logo">
-        <i class="fa-solid fa-book-open"></i>
-        <h2>LireMonde</h2>
+      <div class="navbar-container">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">📚</span>
+          <span>ReadSphere</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="alire.html">À lire</a></li>
+          <li><a href="admin.html">Admin</a></li>
+        </ul>
       </div>
-
-      <ul class="nav-links">
-        <li>
-          <a href="index.html" class="active"> Accueil </a>
-        </li>
-
-        <li>
-          <a href="alire.html"> À lire </a>
-        </li>
-
-        <li>
-          <a href="admin.html"> Admin </a>
-        </li>
-      </ul>
     </nav>
 
-    <!-- ================= HERO SECTION ================= -->
+    <!-- Main Content -->
+    <main class="container">
+      <h1 class="page-title">📖 Discover Your Next Read</h1>
 
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Découvrez Votre <span>Prochaine Lecture</span></h1>
-
-        <p>
-          Explorez des centaines de livres dynamiques, ajoutez vos favoris et
-          gérez votre liste de lecture.
-        </p>
-
-        <button class="hero-btn">Explorer les livres</button>
-      </div>
-    </section>
-
-    <!-- ================= SEARCH + FILTER ================= -->
-
-    <section class="controls">
-      <!-- Search -->
-
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Rechercher un livre..."
-        />
+      <!-- Search & Filter -->
+      <div class="controls-bar">
+        <div class="search-box">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="🔍 Search by title or author..."
+          />
+        </div>
+        <div class="filter-select">
+          <select id="genre-filter">
+            <option value="all">All Genres</option>
+          </select>
+        </div>
       </div>
 
-      <!-- Dynamic Filters -->
+      <!-- Books Grid -->
+      <div class="book-grid" id="books-grid"></div>
 
-      <div id="filters" class="filters">
-        <!-- JS GENERATED -->
-      </div>
-    </section>
-
-    <!-- ================= BOOKS SECTION ================= -->
-
-    <main class="books-section">
-      <div class="section-title">
-        <h2>Nos Livres</h2>
-
-        <p>Tous les livres sont chargés dynamiquement depuis une API REST.</p>
-      </div>
-
-      <!-- Dynamic Cards -->
-
-      <div id="books-container" class="books-container">
-        <!-- JS GENERATED -->
+      <!-- Empty State -->
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h3>No books found</h3>
+        <p>Try adjusting your search or filter criteria.</p>
       </div>
     </main>
 
-    <!-- ================= MODAL ================= -->
-
-    <div id="bookModal" class="modal">
-      <div class="modal-content">
-        <!-- CLOSE -->
-
-        <span class="close-btn" id="closeModal"> &times; </span>
-
-        <!-- DYNAMIC CONTENT -->
-
-        <div id="modalBody"></div>
-      </div>
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal" id="modal-content"></div>
     </div>
 
-    <!-- ================= LOADING ================= -->
-
-    <div id="loader" class="loader-container hidden">
-      <div class="loader"></div>
-    </div>
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer class="footer">
-      <div class="footer-content">
-        <h3>ReadSphere</h3>
-
-        <p>Plateforme interactive de gestion et découverte de livres.</p>
-
-        <div class="footer-icons">
-          <i class="fa-brands fa-facebook"></i>
-
-          <i class="fa-brands fa-instagram"></i>
-
-          <i class="fa-brands fa-github"></i>
-
-          <i class="fa-brands fa-linkedin"></i>
-        </div>
-
-        <small> © 2026 ReadSphere - Tous droits réservés </small>
-      </div>
-    </footer>
-
-    <!-- ================= SCRIPT ================= -->
-
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/modal.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

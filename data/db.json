@@ -1,58 +1,59 @@
 {
   "books": [
     {
-      "id": 1,
+      "id": "1",
+      "titre": "The Great Gatsby",
+      "auteur": "F. Scott Fitzgerald",
+      "genre": "Classic",
+      "description": "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan.",
+      "couverture": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+      "aLire": true
+    },
+    {
+      "id": "2",
       "titre": "1984",
       "auteur": "George Orwell",
-      "genre": "Science-fiction",
-      "description": "Roman dystopique.",
-      "couverture": "https://picsum.photos/200/300?1",
+      "genre": "Dystopian",
+      "description": "A chilling prophecy about the future of totalitarian regimes and mass surveillance.",
+      "couverture": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=400&h=600&fit=crop",
       "aLire": false
     },
     {
-      "id": 2,
-      "titre": "Le Petit Prince",
-      "auteur": "Antoine de Saint-Exupéry",
-      "genre": "Classique",
-      "description": "Livre philosophique.",
-      "couverture": "https://picsum.photos/200/300?2",
+      "id": "3",
+      "titre": "To Kill a Mockingbird",
+      "auteur": "Harper Lee",
+      "genre": "Classic",
+      "description": "A gripping tale of racial injustice and childhood innocence in the American South.",
+      "couverture": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop",
       "aLire": true
     },
     {
-      "id": 3,
-      "titre": "Harry Potter",
-      "auteur": "J.K Rowling",
-      "genre": "Fantasy",
-      "description": "Magie et aventure.",
-      "couverture": "https://picsum.photos/200/300?3",
-      "aLire": false
-    },
-    {
-      "id": 4,
+      "id": "4",
       "titre": "Dune",
       "auteur": "Frank Herbert",
-      "genre": "Science-fiction",
-      "description": "Planète désertique.",
-      "couverture": "https://picsum.photos/200/300?4",
+      "genre": "Science Fiction",
+      "description": "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides.",
+      "couverture": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=600&fit=crop",
       "aLire": false
     },
     {
-      "id": 5,
-      "titre": "Hamlet",
-      "auteur": "Shakespeare",
-      "genre": "Drame",
-      "description": "Tragédie classique.",
-      "couverture": "https://picsum.photos/200/300?5",
-      "aLire": false
-    },
-    {
-      "id": 6,
-      "titre": "Le Seigneur des Anneaux",
-      "auteur": "Tolkien",
+      "id": "5",
+      "titre": "The Hobbit",
+      "auteur": "J.R.R. Tolkien",
       "genre": "Fantasy",
-      "description": "Aventure épique.",
-      "couverture": "https://picsum.photos/200/300?6",
-      "aLire": true
+      "description": "Bilbo Baggins, a hobbit, is swept into an epic quest to reclaim the lost Dwarf Kingdom.",
+      "couverture": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=600&fit=crop",
+      "aLire": false
+    },
+    {
+      "id": "6",
+      "titre": "Pride and Prejudice",
+      "auteur": "Jane Austen",
+      "genre": "Romance",
+      "description": "The romantic clash between the opinionated Elizabeth Bennet and her proud beau Mr. Darcy.",
+      "couverture": "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=600&fit=crop",
+      "aLire": false
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

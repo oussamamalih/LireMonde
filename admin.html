@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReadSphere - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">📚</span>
+          <span>ReadSphere</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="alire.html">À lire</a></li>
+          <li><a href="admin.html" class="active">Admin</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+      <h1 class="page-title">⚙️ Admin Dashboard</h1>
+
+      <!-- Add/Edit Form -->
+      <div class="admin-form">
+        <h2 id="form-title">➕ Add New Book</h2>
+        <form id="book-form">
+          <input type="hidden" id="book-id" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="titre">Title *</label>
+              <input
+                type="text"
+                id="titre"
+                class="form-input"
+                required
+                placeholder="Book title"
+              />
+            </div>
+            <div class="form-group">
+              <label for="auteur">Author *</label>
+              <input
+                type="text"
+                id="auteur"
+                class="form-input"
+                required
+                placeholder="Author name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="genre">Genre *</label>
+              <input
+                type="text"
+                id="genre"
+                class="form-input"
+                required
+                placeholder="e.g. Fantasy, Classic"
+              />
+            </div>
+            <div class="form-group">
+              <label for="couverture">Cover Image URL *</label>
+              <input
+                type="url"
+                id="couverture"
+                class="form-input"
+                required
+                placeholder="https://..."
+              />
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1">
+              <label for="description">Description *</label>
+              <textarea
+                id="description"
+                class="form-textarea"
+                required
+                placeholder="Book description..."
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="aLire" />
+                Add to Reading List (À lire)
+              </label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submit-btn">
+              Add Book
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary hidden"
+              id="cancel-btn"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Books Table -->
+      <div class="admin-table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Cover</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Genre</th>
+              <th>À lire</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <tr>
+              <td colspan="6" class="text-center">Loading books...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
