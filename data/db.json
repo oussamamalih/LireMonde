@@ -16,7 +16,7 @@
       "genre": "Dystopian",
       "description": "A chilling prophecy about the future of totalitarian regimes and mass surveillance.",
       "couverture": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=400&h=600&fit=crop",
-      "aLire": false
+      "aLire": true
     },
     {
       "id": "3",
@@ -34,7 +34,7 @@
       "genre": "Science Fiction",
       "description": "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides.",
       "couverture": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=600&fit=crop",
-      "aLire": false
+      "aLire": true
     },
     {
       "id": "5",
