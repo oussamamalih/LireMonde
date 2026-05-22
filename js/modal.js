@@ -2,10 +2,10 @@
 // MODAL.JS - Book details modal
 // ============================================
 
-// Get modal elements
-let modal = document.getElementById("bookModal");
-let modalBody = document.getElementById("modalBody");
-let closeBtn = document.querySelector(".close-btn");
+// DOM elements - const is fine
+const modal = document.getElementById("bookModal");
+const modalBody = document.getElementById("modalBody");
+const closeBtn = document.querySelector(".close-btn");
 
 // Close modal when clicking X
 closeBtn.onclick = function () {

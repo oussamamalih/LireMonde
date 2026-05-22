@@ -2,20 +2,20 @@
 // ADMIN.JS - Admin dashboard functionality
 // ============================================
 
-// Get form elements
-let bookForm = document.getElementById("bookForm");
-let formTitle = document.getElementById("formTitle");
-let bookIdInput = document.getElementById("bookId");
-let titleInput = document.getElementById("title");
-let authorInput = document.getElementById("author");
-let genreInput = document.getElementById("genre");
-let coverInput = document.getElementById("cover");
-let descriptionInput = document.getElementById("description");
-let submitBtn = document.getElementById("submitBtn");
-let cancelBtn = document.getElementById("cancelBtn");
-let tableBody = document.getElementById("tableBody");
+// DOM elements - const is fine (we don't reassign these variables)
+const bookForm = document.getElementById("bookForm");
+const formTitle = document.getElementById("formTitle");
+const bookIdInput = document.getElementById("bookId");
+const titleInput = document.getElementById("title");
+const authorInput = document.getElementById("author");
+const genreInput = document.getElementById("genre");
+const coverInput = document.getElementById("cover");
+const descriptionInput = document.getElementById("description");
+const submitBtn = document.getElementById("submitBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const tableBody = document.getElementById("tableBody");
 
-// Variable to track if we're editing
+// MUST be let - toggles between true and false
 let isEditing = false;
 
 // Run when page loads

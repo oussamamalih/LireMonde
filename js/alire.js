@@ -2,9 +2,10 @@
 // ALIRE.JS - To Read list page
 // ============================================
 
-let toReadList = document.getElementById("toReadList");
-let emptyMessage = document.getElementById("emptyMessage");
-let toReadCount = document.getElementById("toReadCount");
+// DOM elements - const is fine
+const toReadList = document.getElementById("toReadList");
+const emptyMessage = document.getElementById("emptyMessage");
+const toReadCount = document.getElementById("toReadCount");
 
 // Run when page loads
 document.addEventListener("DOMContentLoaded", function () {

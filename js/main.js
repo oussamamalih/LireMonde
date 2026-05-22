@@ -2,15 +2,15 @@
 // MAIN.JS - Homepage functionality
 // ============================================
 
-// Variables to store data
+// These MUST be let because they get reassigned later
 let allBooks = [];
 let currentFilter = "all";
 
-// Get elements from HTML
-let booksGrid = document.getElementById("booksGrid");
-let genreFilters = document.getElementById("genreFilters");
-let searchInput = document.getElementById("searchInput");
-let toReadCount = document.getElementById("toReadCount");
+// These are DOM elements - const is fine (we don't reassign the variable)
+const booksGrid = document.getElementById("booksGrid");
+const genreFilters = document.getElementById("genreFilters");
+const searchInput = document.getElementById("searchInput");
+const toReadCount = document.getElementById("toReadCount");
 
 // Run when page loads
 document.addEventListener("DOMContentLoaded", function () {

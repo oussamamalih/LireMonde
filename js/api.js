@@ -2,7 +2,7 @@
 // API.JS - All API calls in one file
 // ============================================
 
-// The API URL (JSON Server runs on port 3000)
+// API URL never changes - use const
 const API_URL = "http://localhost:3000/books";
 
 // Function to get all books
