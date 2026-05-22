@@ -2,57 +2,75 @@
   "books": [
     {
       "id": "1",
-      "titre": "The Great Gatsby",
-      "auteur": "F. Scott Fitzgerald",
+      "title": "Les Misérables",
+      "author": "Victor Hugo",
       "genre": "Classic",
-      "description": "A story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan.",
-      "couverture": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
-      "aLire": true
+      "description": "A sweeping tale of justice, love, and redemption set against the backdrop of 19th-century France. Follow Jean Valjean's journey from convict to saintly figure.",
+      "cover": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+      "toRead": false
     },
     {
       "id": "2",
-      "titre": "1984",
-      "auteur": "George Orwell",
-      "genre": "Dystopian",
-      "description": "A chilling prophecy about the future of totalitarian regimes and mass surveillance.",
-      "couverture": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=400&h=600&fit=crop",
-      "aLire": true
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "genre": "Science Fiction",
+      "description": "Set on the desert planet Arrakis, Dune is the story of Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding.",
+      "cover": "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=600&fit=crop",
+      "toRead": false
     },
     {
       "id": "3",
-      "titre": "To Kill a Mockingbird",
-      "auteur": "Harper Lee",
-      "genre": "Classic",
-      "description": "A gripping tale of racial injustice and childhood innocence in the American South.",
-      "couverture": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop",
-      "aLire": true
+      "title": "Hamlet",
+      "author": "William Shakespeare",
+      "genre": "Drama",
+      "description": "The Tragedy of Hamlet, Prince of Denmark, is a tragedy written by William Shakespeare. It tells the story of Prince Hamlet's quest for revenge.",
+      "cover": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop",
+      "toRead": false
     },
     {
       "id": "4",
-      "titre": "Dune",
-      "auteur": "Frank Herbert",
-      "genre": "Science Fiction",
-      "description": "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides.",
-      "couverture": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=600&fit=crop",
-      "aLire": true
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "description": "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling further than the pantry of his hobbit-hole in Bag End.",
+      "cover": "https://images.unsplash.com/photo-1629196914375-f7e48f477b6d?w=400&h=600&fit=crop",
+      "toRead": false
     },
     {
       "id": "5",
-      "titre": "The Hobbit",
-      "auteur": "J.R.R. Tolkien",
-      "genre": "Fantasy",
-      "description": "Bilbo Baggins, a hobbit, is swept into an epic quest to reclaim the lost Dwarf Kingdom.",
-      "couverture": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=600&fit=crop",
-      "aLire": false
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Science Fiction",
+      "description": "Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real.",
+      "cover": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=400&h=600&fit=crop",
+      "toRead": false
     },
     {
       "id": "6",
-      "titre": "Pride and Prejudice",
-      "auteur": "Jane Austen",
-      "genre": "Romance",
-      "description": "The romantic clash between the opinionated Elizabeth Bennet and her proud beau Mr. Darcy.",
-      "couverture": "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=400&h=600&fit=crop",
-      "aLire": false
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Classic",
+      "description": "Since its immediate success in 1813, Pride and Prejudice has remained one of the most popular novels in the English language.",
+      "cover": "https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=600&fit=crop",
+      "toRead": false
+    },
+    {
+      "id": "7",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "description": "Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive.",
+      "cover": "https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=400&h=600&fit=crop",
+      "toRead": false
+    },
+    {
+      "id": "8",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Classic",
+      "description": "The story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan, of lavish parties on Long Island.",
+      "cover": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop",
+      "toRead": false
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

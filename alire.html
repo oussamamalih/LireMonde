@@ -3,49 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ReadSphere - À lire</title>
+    <title>To Read List - LireMonde</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar">
-      <div class="navbar-container">
-        <a href="index.html" class="logo">
-          <span class="logo-icon">📚</span>
-          <span>ReadSphere</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="alire.html" class="active">À lire</a></li>
-          <li><a href="admin.html">Admin</a></li>
-        </ul>
-      </div>
+      <div class="logo">📚 LireMonde</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="alire.html" class="active"
+            >To Read <span id="toReadCount">0</span></a
+          >
+        </li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
     </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+      <h1>My Reading List</h1>
+      <p>Books you want to read</p>
+    </header>
 
     <!-- Main Content -->
     <main class="container">
-      <h1 class="page-title">📖 My Reading List</h1>
-
-      <!-- Books Grid -->
-      <div class="book-grid" id="alire-grid"></div>
-
-      <!-- Empty State -->
-      <div class="empty-state hidden" id="alire-empty">
-        <div class="empty-state-icon">📚</div>
-        <h3>Your reading list is empty</h3>
-        <p>Browse the home page and add books you want to read!</p>
-        <a href="index.html" class="btn btn-primary mt-2">Browse Books</a>
+      <div id="toReadList" class="books-grid">
+        <!-- To Read books will be loaded here -->
+      </div>
+      <div id="emptyMessage" class="empty-message" style="display: none">
+        <p>No books in your reading list yet.</p>
+        <a href="index.html" class="btn">Browse Books</a>
       </div>
     </main>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal-overlay">
-      <div class="modal" id="modal-content"></div>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 LireMonde - Your Digital Reading Space</p>
+    </footer>
 
     <!-- Scripts -->
     <script src="js/api.js"></script>
-    <script src="js/modal.js"></script>
     <script src="js/alire.js"></script>
   </body>
 </html>

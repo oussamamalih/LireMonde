@@ -1,64 +1,58 @@
-/* ============================
-   ReadSphere - Modal Logic
-   ============================ */
+// ============================================
+// MODAL.JS - Book details modal
+// ============================================
 
-const modalOverlay = document.getElementById("modal-overlay");
-const modalContent = document.getElementById("modal-content");
+// Get modal elements
+let modal = document.getElementById("bookModal");
+let modalBody = document.getElementById("modalBody");
+let closeBtn = document.querySelector(".close-btn");
 
-// Open modal with book details
-async function openBookModal(bookId) {
-  const book = await getBookById(bookId);
+// Close modal when clicking X
+closeBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+// Close modal when clicking outside
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
+// Function to open modal with book details
+async function openModal(bookId) {
+  let book = await getBookById(bookId);
   if (!book) return;
 
-  const isInList = book.aLire;
+  let buttonText = book.toRead ? "Remove from To Read" : "Add to To Read";
+  let buttonClass = book.toRead ? "btn-remove" : "btn-add";
 
-  modalContent.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <img class="modal-image" src="${book.couverture}" alt="${book.titre}">
-    <div class="modal-body">
-      <h2 class="modal-title">${book.titre}</h2>
-      <div class="modal-meta">
-        <span><i class="icon">✍️</i> ${book.auteur}</span>
-        <span><i class="icon">🏷️</i> ${book.genre}</span>
-        ${book.aLire ? '<span><i class="icon">📖</i> In Reading List</span>' : ""}
-      </div>
-      <p class="modal-description">${book.description}</p>
-      <div class="modal-actions">
-        <button class="btn ${isInList ? "btn-danger" : "btn-primary"}" onclick="handleModalToggle(${book.id}, ${isInList})">
-          ${isInList ? "❌ Remove from À lire" : "✅ Add to À lire"}
-        </button>
-        <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-      </div>
-    </div>
-  `;
+  modalBody.innerHTML = `
+        <div class="modal-book">
+            <img src="${book.cover}" alt="${book.title}">
+            <div class="modal-details">
+                <h2>${book.title}</h2>
+                <p class="author">by ${book.author}</p>
+                <span class="genre-tag">${book.genre}</span>
+                <p class="description">${book.description}</p>
+                <button class="btn-to-read ${buttonClass}" onclick="handleToRead(${book.id}, ${book.toRead})">
+                    ${buttonText}
+                </button>
+            </div>
+        </div>
+    `;
 
-  modalOverlay.classList.add("active");
-  document.body.style.overflow = "hidden";
+  modal.style.display = "block";
 }
 
-// Close modal
-function closeModal() {
-  modalOverlay.classList.remove("active");
-  document.body.style.overflow = "";
-}
-
-// Handle toggle from modal
-async function handleModalToggle(id, currentStatus) {
-  await toggleALire(id, currentStatus);
-  closeModal();
-  // Refresh the page's book list if function exists
-  if (typeof refreshBooks === "function") refreshBooks();
-  if (typeof loadALireBooks === "function") loadALireBooks();
-}
-
-// Close on overlay click
-modalOverlay.addEventListener("click", (e) => {
-  if (e.target === modalOverlay) closeModal();
-});
-
-// Close on Escape key
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modalOverlay.classList.contains("active")) {
-    closeModal();
+// Function to handle Add/Remove from To Read
+async function handleToRead(id, currentStatus) {
+  let updated = await toggleToRead(id, currentStatus);
+  if (updated) {
+    modal.style.display = "none";
+    // Refresh the page data
+    allBooks = await getAllBooks();
+    displayBooks(filterBooks(allBooks, searchInput.value));
+    updateToReadCount(allBooks);
   }
-});
+}

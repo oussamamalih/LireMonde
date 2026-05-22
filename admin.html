@@ -3,127 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ReadSphere - Admin Dashboard</title>
+    <title>Admin - LireMonde</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar">
-      <div class="navbar-container">
-        <a href="index.html" class="logo">
-          <span class="logo-icon">📚</span>
-          <span>ReadSphere</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="alire.html">À lire</a></li>
-          <li><a href="admin.html" class="active">Admin</a></li>
-        </ul>
-      </div>
+      <div class="logo">📚 LireMonde</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="alire.html">To Read</a></li>
+        <li><a href="admin.html" class="active">Admin</a></li>
+      </ul>
     </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+      <h1>Admin Dashboard</h1>
+      <p>Manage your book collection</p>
+    </header>
 
     <!-- Main Content -->
     <main class="container">
-      <h1 class="page-title">⚙️ Admin Dashboard</h1>
-
-      <!-- Add/Edit Form -->
-      <div class="admin-form">
-        <h2 id="form-title">➕ Add New Book</h2>
-        <form id="book-form">
-          <input type="hidden" id="book-id" />
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="titre">Title *</label>
-              <input
-                type="text"
-                id="titre"
-                class="form-input"
-                required
-                placeholder="Book title"
-              />
-            </div>
-            <div class="form-group">
-              <label for="auteur">Author *</label>
-              <input
-                type="text"
-                id="auteur"
-                class="form-input"
-                required
-                placeholder="Author name"
-              />
-            </div>
-            <div class="form-group">
-              <label for="genre">Genre *</label>
-              <input
-                type="text"
-                id="genre"
-                class="form-input"
-                required
-                placeholder="e.g. Fantasy, Classic"
-              />
-            </div>
-            <div class="form-group">
-              <label for="couverture">Cover Image URL *</label>
-              <input
-                type="url"
-                id="couverture"
-                class="form-input"
-                required
-                placeholder="https://..."
-              />
-            </div>
-            <div class="form-group" style="grid-column: 1 / -1">
-              <label for="description">Description *</label>
-              <textarea
-                id="description"
-                class="form-textarea"
-                required
-                placeholder="Book description..."
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label>
-                <input type="checkbox" id="aLire" />
-                Add to Reading List (À lire)
-              </label>
-            </div>
+      <!-- Add Book Form -->
+      <section class="admin-form-section">
+        <h2 id="formTitle">Add New Book</h2>
+        <form id="bookForm" class="admin-form">
+          <input type="hidden" id="bookId" />
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" required />
           </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary" id="submit-btn">
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" id="author" required />
+          </div>
+          <div class="form-group">
+            <label for="genre">Genre</label>
+            <select id="genre" required>
+              <option value="Classic">Classic</option>
+              <option value="Science Fiction">Science Fiction</option>
+              <option value="Drama">Drama</option>
+              <option value="Fantasy">Fantasy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cover">Cover Image URL</label>
+            <input
+              type="url"
+              id="cover"
+              placeholder="https://example.com/image.jpg"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" rows="4" required></textarea>
+          </div>
+          <div class="form-buttons">
+            <button type="submit" id="submitBtn" class="btn btn-primary">
               Add Book
             </button>
             <button
               type="button"
-              class="btn btn-secondary hidden"
-              id="cancel-btn"
+              id="cancelBtn"
+              class="btn btn-secondary"
+              style="display: none"
             >
               Cancel
             </button>
           </div>
         </form>
-      </div>
+      </section>
 
       <!-- Books Table -->
-      <div class="admin-table-container">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Cover</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Genre</th>
-              <th>À lire</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="admin-table-body">
-            <tr>
-              <td colspan="6" class="text-center">Loading books...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <section class="admin-table-section">
+        <h2>Book Collection</h2>
+        <div class="table-container">
+          <table id="booksTable" class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Table rows loaded by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 LireMonde - Your Digital Reading Space</p>
+    </footer>
 
     <!-- Scripts -->
     <script src="js/api.js"></script>

@@ -1,111 +1,131 @@
-/* ============================
-   ReadSphere - Admin Dashboard
-   ============================ */
+// ============================================
+// ADMIN.JS - Admin dashboard functionality
+// ============================================
 
-const adminTableBody = document.getElementById("admin-table-body");
-const bookForm = document.getElementById("book-form");
-const formTitle = document.getElementById("form-title");
-const submitBtn = document.getElementById("submit-btn");
-const cancelBtn = document.getElementById("cancel-btn");
-const bookIdField = document.getElementById("book-id");
+// Get form elements
+let bookForm = document.getElementById("bookForm");
+let formTitle = document.getElementById("formTitle");
+let bookIdInput = document.getElementById("bookId");
+let titleInput = document.getElementById("title");
+let authorInput = document.getElementById("author");
+let genreInput = document.getElementById("genre");
+let coverInput = document.getElementById("cover");
+let descriptionInput = document.getElementById("description");
+let submitBtn = document.getElementById("submitBtn");
+let cancelBtn = document.getElementById("cancelBtn");
+let tableBody = document.getElementById("tableBody");
 
+// Variable to track if we're editing
 let isEditing = false;
 
-// Load all books in table
-async function loadAdminBooks() {
-  const books = await getAllBooks();
-  renderTable(books);
-}
+// Run when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  loadBooksTable();
+});
 
-// Render admin table
-function renderTable(books) {
-  adminTableBody.innerHTML = books
-    .map(
-      (book) => `
-    <tr>
-      <td><img src="${book.couverture}" alt="${book.titre}"></td>
-      <td><strong>${book.titre}</strong></td>
-      <td>${book.auteur}</td>
-      <td><span class="book-card-genre">${book.genre}</span></td>
-      <td>${book.aLire ? "✅ Yes" : "❌ No"}</td>
-      <td>
-        <button class="btn btn-primary btn-small" onclick="editBook(${book.id})">✏️ Edit</button>
-        <button class="btn btn-danger btn-small" onclick="deleteBookAdmin(${book.id})">🗑️ Delete</button>
-      </td>
-    </tr>
-  `,
-    )
-    .join("");
-}
+// Form submit handler
+bookForm.addEventListener("submit", async function (event) {
+  event.preventDefault(); // Stop page from reloading
 
-// Handle form submit (Add or Update)
-bookForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const bookData = {
-    titre: document.getElementById("titre").value.trim(),
-    auteur: document.getElementById("auteur").value.trim(),
-    genre: document.getElementById("genre").value.trim(),
-    description: document.getElementById("description").value.trim(),
-    couverture: document.getElementById("couverture").value.trim(),
-    aLire: document.getElementById("aLire").checked,
+  // Get values from form
+  let bookData = {
+    title: titleInput.value,
+    author: authorInput.value,
+    genre: genreInput.value,
+    cover: coverInput.value,
+    description: descriptionInput.value,
+    toRead: false,
   };
 
   if (isEditing) {
-    const id = bookIdField.value;
-    await updateBook(id, bookData);
+    // Update existing book
+    let id = parseInt(bookIdInput.value);
+    let updated = await updateBook(id, bookData);
+    if (updated) {
+      resetForm();
+      loadBooksTable();
+      alert("Book updated successfully!");
+    }
   } else {
-    await addBook(bookData);
+    // Add new book
+    let newBook = await addBook(bookData);
+    if (newBook) {
+      resetForm();
+      loadBooksTable();
+      alert("Book added successfully!");
+    }
   }
-
-  resetForm();
-  loadAdminBooks();
 });
 
-// Edit book - fill form
+// Cancel button handler
+cancelBtn.onclick = function () {
+  resetForm();
+};
+
+// Function to load books into table
+async function loadBooksTable() {
+  let books = await getAllBooks();
+  tableBody.innerHTML = "";
+
+  for (let i = 0; i < books.length; i++) {
+    let book = books[i];
+    let row = document.createElement("tr");
+    row.innerHTML = `
+            <td>${book.id}</td>
+            <td><img src="${book.cover}" alt="${book.title}"></td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.genre}</td>
+            <td class="table-actions">
+                <button class="btn-warning" onclick="editBook(${book.id})">Edit</button>
+                <button class="btn-danger" onclick="deleteBookById(${book.id})">Delete</button>
+            </td>
+        `;
+    tableBody.appendChild(row);
+  }
+}
+
+// Function to fill form for editing
 async function editBook(id) {
-  const book = await getBookById(id);
+  let book = await getBookById(id);
   if (!book) return;
 
-  document.getElementById("titre").value = book.titre;
-  document.getElementById("auteur").value = book.auteur;
-  document.getElementById("genre").value = book.genre;
-  document.getElementById("description").value = book.description;
-  document.getElementById("couverture").value = book.couverture;
-  document.getElementById("aLire").checked = book.aLire;
-  bookIdField.value = book.id;
+  // Fill form with book data
+  bookIdInput.value = book.id;
+  titleInput.value = book.title;
+  authorInput.value = book.author;
+  genreInput.value = book.genre;
+  coverInput.value = book.cover;
+  descriptionInput.value = book.description;
 
+  // Change form to edit mode
   isEditing = true;
-  formTitle.textContent = "✏️ Edit Book";
+  formTitle.textContent = "Edit Book";
   submitBtn.textContent = "Update Book";
-  cancelBtn.classList.remove("hidden");
+  cancelBtn.style.display = "inline-block";
 
   // Scroll to form
   bookForm.scrollIntoView({ behavior: "smooth" });
 }
 
-// Delete book
-async function deleteBookAdmin(id) {
-  if (!confirm("Are you sure you want to delete this book?")) return;
-  const success = await deleteBook(id);
-  if (success) loadAdminBooks();
+// Function to delete a book
+async function deleteBookById(id) {
+  let confirmDelete = confirm("Are you sure you want to delete this book?");
+  if (!confirmDelete) return;
+
+  let success = await deleteBook(id);
+  if (success) {
+    loadBooksTable();
+    alert("Book deleted successfully!");
+  }
 }
 
-// Reset form
+// Function to reset form
 function resetForm() {
   bookForm.reset();
-  bookIdField.value = "";
+  bookIdInput.value = "";
   isEditing = false;
-  formTitle.textContent = "➕ Add New Book";
+  formTitle.textContent = "Add New Book";
   submitBtn.textContent = "Add Book";
-  cancelBtn.classList.add("hidden");
+  cancelBtn.style.display = "none";
 }
-
-// Cancel edit
-cancelBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  resetForm();
-});
-
-// Init
-loadAdminBooks();

@@ -1,56 +1,74 @@
-/* ============================
-   ReadSphere - Reading List Page
-   ============================ */
+// ============================================
+// ALIRE.JS - To Read list page
+// ============================================
 
-const aLireGrid = document.getElementById("alire-grid");
-const aLireEmpty = document.getElementById("alire-empty");
+let toReadList = document.getElementById("toReadList");
+let emptyMessage = document.getElementById("emptyMessage");
+let toReadCount = document.getElementById("toReadCount");
 
-// Load reading list books
-async function loadALireBooks() {
-  showLoading();
-  const books = await getAllBooks();
-  const aLireBooks = books.filter((b) => b.aLire);
+// Run when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  loadToReadBooks();
+});
 
-  if (aLireBooks.length === 0) {
-    aLireGrid.innerHTML = "";
-    aLireEmpty.classList.remove("hidden");
-    return;
+// Function to load To Read books
+async function loadToReadBooks() {
+  let books = await getAllBooks();
+  let toReadBooks = [];
+
+  // Find only books with toRead = true
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].toRead) {
+      toReadBooks.push(books[i]);
+    }
   }
 
-  aLireEmpty.classList.add("hidden");
-  aLireGrid.innerHTML = aLireBooks
-    .map(
-      (book) => `
-    <div class="book-card" onclick="openBookModal(${book.id})">
-      <span class="badge">📖 À lire</span>
-      <img class="book-card-image" src="${book.couverture}" alt="${book.titre}" loading="lazy">
-      <div class="book-card-body">
-        <h3 class="book-card-title">${book.titre}</h3>
-        <p class="book-card-author">by ${book.auteur}</p>
-        <span class="book-card-genre">${book.genre}</span>
-        <div class="mt-2">
-          <button class="btn btn-danger btn-small" onclick="event.stopPropagation(); removeFromALire(${book.id})">
-            ❌ Remove
-          </button>
-        </div>
-      </div>
-    </div>
-  `,
-    )
-    .join("");
+  // Update counter
+  let count = 0;
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].toRead) count++;
+  }
+  toReadCount.textContent = count;
+
+  // Show empty message or books
+  if (toReadBooks.length === 0) {
+    toReadList.style.display = "none";
+    emptyMessage.style.display = "block";
+  } else {
+    toReadList.style.display = "grid";
+    emptyMessage.style.display = "none";
+    displayToReadBooks(toReadBooks);
+  }
 }
 
-// Show loading
-function showLoading() {
-  aLireGrid.innerHTML = '<div class="spinner"></div>';
-  aLireEmpty.classList.add("hidden");
+// Function to display To Read books
+function displayToReadBooks(books) {
+  toReadList.innerHTML = "";
+
+  for (let i = 0; i < books.length; i++) {
+    let book = books[i];
+    let card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+            <img src="${book.cover}" alt="${book.title}" class="book-cover">
+            <div class="book-info">
+                <div class="book-title">${book.title}</div>
+                <div class="book-author">by ${book.author}</div>
+                <span class="book-genre">${book.genre}</span>
+                <br><br>
+                <button class="btn btn-danger" onclick="removeFromToRead(${book.id})">
+                    Remove from List
+                </button>
+            </div>
+        `;
+    toReadList.appendChild(card);
+  }
 }
 
-// Remove from reading list
-async function removeFromALire(id) {
-  await toggleALire(id, true); // true = currently in list, so toggle removes it
-  loadALireBooks();
+// Function to remove book from To Read
+async function removeFromToRead(id) {
+  let updated = await toggleToRead(id, true); // true because it's currently in list
+  if (updated) {
+    loadToReadBooks(); // Refresh the list
+  }
 }
-
-// Init
-loadALireBooks();

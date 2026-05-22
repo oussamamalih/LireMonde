@@ -1,104 +1,131 @@
-/* ============================
-   ReadSphere - Home Page Logic
-   ============================ */
+// ============================================
+// MAIN.JS - Homepage functionality
+// ============================================
 
-const booksGrid = document.getElementById("books-grid");
-const searchInput = document.getElementById("search-input");
-const genreFilter = document.getElementById("genre-filter");
-const emptyState = document.getElementById("empty-state");
-
+// Variables to store data
 let allBooks = [];
-let currentGenre = "all";
+let currentFilter = "all";
 
-// Load and display books
+// Get elements from HTML
+let booksGrid = document.getElementById("booksGrid");
+let genreFilters = document.getElementById("genreFilters");
+let searchInput = document.getElementById("searchInput");
+let toReadCount = document.getElementById("toReadCount");
+
+// Run when page loads
+document.addEventListener("DOMContentLoaded", function () {
+  loadBooks();
+});
+
+// Function to load and display books
 async function loadBooks() {
-  showLoading();
   allBooks = await getAllBooks();
-  populateGenreFilter();
-  renderBooks(allBooks);
+  createGenreButtons(allBooks);
+  displayBooks(allBooks);
+  updateToReadCount(allBooks);
 }
 
-// Show loading spinner
-function showLoading() {
-  booksGrid.innerHTML = '<div class="spinner"></div>';
-  emptyState.classList.add("hidden");
+// Function to create genre filter buttons
+function createGenreButtons(books) {
+  // Get unique genres
+  let genres = [];
+  for (let i = 0; i < books.length; i++) {
+    if (!genres.includes(books[i].genre)) {
+      genres.push(books[i].genre);
+    }
+  }
+
+  // Create button for each genre
+  for (let i = 0; i < genres.length; i++) {
+    let btn = document.createElement("button");
+    btn.className = "genre-btn";
+    btn.textContent = genres[i];
+    btn.setAttribute("data-genre", genres[i]);
+    btn.onclick = function () {
+      filterByGenre(genres[i], btn);
+    };
+    genreFilters.appendChild(btn);
+  }
 }
 
-// Render books grid
-function renderBooks(books) {
+// Function to filter books by genre
+function filterByGenre(genre, clickedBtn) {
+  currentFilter = genre;
+
+  // Update active button style
+  let buttons = genreFilters.querySelectorAll(".genre-btn");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove("active");
+  }
+  clickedBtn.classList.add("active");
+
+  // Filter and display
+  let filtered = filterBooks(allBooks, searchInput.value);
+  displayBooks(filtered);
+}
+
+// Function to display books in grid
+function displayBooks(books) {
+  booksGrid.innerHTML = "";
+
   if (books.length === 0) {
-    booksGrid.innerHTML = "";
-    emptyState.classList.remove("hidden");
+    booksGrid.innerHTML =
+      '<p style="grid-column: 1/-1; text-align: center; color: #7f8c8d;">No books found.</p>';
     return;
   }
 
-  emptyState.classList.add("hidden");
-  booksGrid.innerHTML = books
-    .map(
-      (book) => `
-    <div class="book-card" onclick="openBookModal(${book.id})">
-      ${book.aLire ? '<span class="badge">📖 À lire</span>' : ""}
-      <img class="book-card-image" src="${book.couverture}" alt="${book.titre}" loading="lazy">
-      <div class="book-card-body">
-        <h3 class="book-card-title">${book.titre}</h3>
-        <p class="book-card-author">by ${book.auteur}</p>
-        <span class="book-card-genre">${book.genre}</span>
-      </div>
-    </div>
-  `,
-    )
-    .join("");
+  for (let i = 0; i < books.length; i++) {
+    let book = books[i];
+    let card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+            <img src="${book.cover}" alt="${book.title}" class="book-cover">
+            <div class="book-info">
+                <div class="book-title">${book.title}</div>
+                <div class="book-author">by ${book.author}</div>
+                <span class="book-genre">${book.genre}</span>
+            </div>
+        `;
+    card.onclick = function () {
+      openModal(book.id);
+    };
+    booksGrid.appendChild(card);
+  }
 }
 
-// Populate genre filter dropdown
-function populateGenreFilter() {
-  const genres = [...new Set(allBooks.map((b) => b.genre))].sort();
-  const currentValue = genreFilter.value;
+// Search functionality
+searchInput.addEventListener("input", function () {
+  let filtered = filterBooks(allBooks, searchInput.value);
+  displayBooks(filtered);
+});
 
-  genreFilter.innerHTML = '<option value="all">All Genres</option>';
-  genres.forEach((genre) => {
-    const option = document.createElement("option");
-    option.value = genre;
-    option.textContent = genre;
-    genreFilter.appendChild(option);
-  });
+// Function to filter books by search and genre
+function filterBooks(books, searchText) {
+  let result = [];
+  let text = searchText.toLowerCase();
 
-  genreFilter.value = currentValue;
-}
+  for (let i = 0; i < books.length; i++) {
+    let book = books[i];
+    let matchesSearch =
+      book.title.toLowerCase().includes(text) ||
+      book.author.toLowerCase().includes(text);
+    let matchesGenre = currentFilter === "all" || book.genre === currentFilter;
 
-// Filter and search combined
-function filterBooks() {
-  const query = searchInput.value.toLowerCase().trim();
-  const genre = genreFilter.value;
-
-  let filtered = allBooks;
-
-  // Genre filter
-  if (genre !== "all") {
-    filtered = filtered.filter((b) => b.genre === genre);
+    if (matchesSearch && matchesGenre) {
+      result.push(book);
+    }
   }
 
-  // Search filter
-  if (query) {
-    filtered = filtered.filter(
-      (b) =>
-        b.titre.toLowerCase().includes(query) ||
-        b.auteur.toLowerCase().includes(query),
-    );
+  return result;
+}
+
+// Function to update "To Read" counter
+function updateToReadCount(books) {
+  let count = 0;
+  for (let i = 0; i < books.length; i++) {
+    if (books[i].toRead) {
+      count++;
+    }
   }
-
-  renderBooks(filtered);
+  toReadCount.textContent = count;
 }
-
-// Refresh books (called after modal actions)
-async function refreshBooks() {
-  allBooks = await getAllBooks();
-  filterBooks();
-}
-
-// Event Listeners
-searchInput.addEventListener("input", filterBooks);
-genreFilter.addEventListener("change", filterBooks);
-
-// Init
-loadBooks();

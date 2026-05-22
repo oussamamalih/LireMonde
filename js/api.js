@@ -1,127 +1,123 @@
-/* ============================
-   ReadSphere - API Functions
-   Base URL: http://localhost:3000/books
-   ============================ */
+// ============================================
+// API.JS - All API calls in one file
+// ============================================
 
+// The API URL (JSON Server runs on port 3000)
 const API_URL = "http://localhost:3000/books";
 
-// GET all books
+// Function to get all books
 async function getAllBooks() {
   try {
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error("Failed to fetch books");
-    return await response.json();
+    let response = await fetch(API_URL);
+    if (!response.ok) {
+      throw new Error("Network error: " + response.status);
+    }
+    let books = await response.json();
+    return books;
   } catch (error) {
-    console.error("Error fetching books:", error);
-    showToast("Failed to load books", "error");
+    console.log("Error getting books:", error);
+    alert("Could not load books. Please check if JSON Server is running.");
     return [];
   }
 }
 
-// GET book by ID
+// Function to get one book by ID
 async function getBookById(id) {
   try {
-    const response = await fetch(`${API_URL}/${id}`);
-    if (!response.ok) throw new Error("Failed to fetch book");
-    return await response.json();
+    let response = await fetch(API_URL + "/" + id);
+    if (!response.ok) {
+      throw new Error("Network error: " + response.status);
+    }
+    let book = await response.json();
+    return book;
   } catch (error) {
-    console.error("Error fetching book:", error);
-    showToast("Failed to load book details", "error");
+    console.log("Error getting book:", error);
+    alert("Could not load book details.");
     return null;
   }
 }
 
-// POST new book
-async function addBook(book) {
+// Function to add a new book
+async function addBook(bookData) {
   try {
-    const response = await fetch(API_URL, {
+    let response = await fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(book),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookData),
     });
-    if (!response.ok) throw new Error("Failed to add book");
-    showToast("Book added successfully!", "success");
-    return await response.json();
+    if (!response.ok) {
+      throw new Error("Network error: " + response.status);
+    }
+    let newBook = await response.json();
+    return newBook;
   } catch (error) {
-    console.error("Error adding book:", error);
-    showToast("Failed to add book", "error");
+    console.log("Error adding book:", error);
+    alert("Could not add book.");
     return null;
   }
 }
 
-// DELETE book
+// Function to update a book
+async function updateBook(id, bookData) {
+  try {
+    let response = await fetch(API_URL + "/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookData),
+    });
+    if (!response.ok) {
+      throw new Error("Network error: " + response.status);
+    }
+    let updatedBook = await response.json();
+    return updatedBook;
+  } catch (error) {
+    console.log("Error updating book:", error);
+    alert("Could not update book.");
+    return null;
+  }
+}
+
+// Function to delete a book
 async function deleteBook(id) {
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    let response = await fetch(API_URL + "/" + id, {
       method: "DELETE",
     });
-    if (!response.ok) throw new Error("Failed to delete book");
-    showToast("Book deleted successfully!", "success");
+    if (!response.ok) {
+      throw new Error("Network error: " + response.status);
+    }
     return true;
   } catch (error) {
-    console.error("Error deleting book:", error);
-    showToast("Failed to delete book", "error");
+    console.log("Error deleting book:", error);
+    alert("Could not delete book.");
     return false;
   }
 }
 
-// PATCH toggle aLire status
-async function toggleALire(id, currentStatus) {
+// Function to toggle "To Read" status
+async function toggleToRead(id, currentStatus) {
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    let response = await fetch(API_URL + "/" + id, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ aLire: !currentStatus }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        toRead: !currentStatus,
+      }),
     });
-    if (!response.ok) throw new Error("Failed to update reading list");
-    const updated = await response.json();
-    const message = updated.aLire
-      ? "Added to reading list!"
-      : "Removed from reading list!";
-    showToast(message, "success");
-    return updated;
+    if (!response.ok) {
+      throw new Error("Network error: " + response.status);
+    }
+    let updatedBook = await response.json();
+    return updatedBook;
   } catch (error) {
-    console.error("Error toggling aLire:", error);
-    showToast("Failed to update reading list", "error");
+    console.log("Error updating toRead:", error);
+    alert("Could not update reading list.");
     return null;
   }
-}
-
-// PUT update full book (for admin edit)
-async function updateBook(id, bookData) {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bookData),
-    });
-    if (!response.ok) throw new Error("Failed to update book");
-    showToast("Book updated successfully!", "success");
-    return await response.json();
-  } catch (error) {
-    console.error("Error updating book:", error);
-    showToast("Failed to update book", "error");
-    return null;
-  }
-}
-
-// Toast notification helper
-function showToast(message, type = "success") {
-  const existing = document.querySelector(".toast");
-  if (existing) existing.remove();
-
-  const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
-  toast.textContent = message;
-  document.body.appendChild(toast);
-
-  // Trigger animation
-  requestAnimationFrame(() => {
-    toast.classList.add("show");
-  });
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
 }
