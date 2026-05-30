@@ -6,7 +6,7 @@
       "author": "Victor Hugo",
       "genre": "Classic",
       "description": "A sweeping tale of justice, love, and redemption set against the backdrop of 19th-century France. Follow Jean Valjean's journey from convict to saintly figure.",
-      "cover": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
+      "cover": "images/vh.jfif",
       "toRead": false
     },
     {
@@ -15,7 +15,7 @@
       "author": "Frank Herbert",
       "genre": "Science Fiction",
       "description": "Set on the desert planet Arrakis, Dune is the story of Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding.",
-      "cover": "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400&h=600&fit=crop",
+      "cover": "images/Dune.jfif",
       "toRead": false
     },
     {
@@ -24,7 +24,7 @@
       "author": "William Shakespeare",
       "genre": "Drama",
       "description": "The Tragedy of Hamlet, Prince of Denmark, is a tragedy written by William Shakespeare. It tells the story of Prince Hamlet's quest for revenge.",
-      "cover": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&fit=crop",
+      "cover": "images/Hamlet.jfif",
       "toRead": false
     },
     {
@@ -33,7 +33,7 @@
       "author": "J.R.R. Tolkien",
       "genre": "Fantasy",
       "description": "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling further than the pantry of his hobbit-hole in Bag End.",
-      "cover": "https://images.unsplash.com/photo-1629196914375-f7e48f477b6d?w=400&h=600&fit=crop",
+      "cover": "images/ww.jfif",
       "toRead": false
     },
     {
@@ -42,7 +42,7 @@
       "author": "George Orwell",
       "genre": "Science Fiction",
       "description": "Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real.",
-      "cover": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=400&h=600&fit=crop",
+      "cover": "images/1984.jfif",
       "toRead": false
     },
     {
@@ -51,7 +51,7 @@
       "author": "Jane Austen",
       "genre": "Classic",
       "description": "Since its immediate success in 1813, Pride and Prejudice has remained one of the most popular novels in the English language.",
-      "cover": "https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=400&h=600&fit=crop",
+      "cover": "images/pridge.jfif",
       "toRead": false
     },
     {
@@ -60,7 +60,7 @@
       "author": "J.K. Rowling",
       "genre": "Fantasy",
       "description": "Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive.",
-      "cover": "https://images.unsplash.com/photo-1618666012174-83b441c0bc76?w=400&h=600&fit=crop",
+      "cover": "images/prettybooks.jfif",
       "toRead": false
     },
     {
@@ -69,8 +69,17 @@
       "author": "F. Scott Fitzgerald",
       "genre": "Classic",
       "description": "The story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan, of lavish parties on Long Island.",
-      "cover": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop",
+      "cover": "images/great.jfif",
       "toRead": false
+    },
+    {
+      "title": "test",
+      "author": "allo",
+      "genre": "Drama",
+      "cover": "images/vh.jfif",
+      "description": "asdasfas",
+      "toRead": false,
+      "id": "4gE7i5SziGk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
