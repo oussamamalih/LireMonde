@@ -25,7 +25,7 @@
       "genre": "Drama",
       "description": "The Tragedy of Hamlet, Prince of Denmark, is a tragedy written by William Shakespeare. It tells the story of Prince Hamlet's quest for revenge.",
       "cover": "images/Hamlet.jfif",
-      "toRead": true
+      "toRead": false
     },
     {
       "id": "4",

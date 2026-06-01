@@ -464,22 +464,27 @@ body {
   background-color: var(--color-secondary);
 }
 
-.btn-danger {
-  background-color: var(--color-danger);
-  color: var(--color-white);
-}
-
-.btn-danger:hover {
-  background-color: var(--color-danger-hover);
-}
-
 .btn-warning {
-  background-color: var(--color-warning);
-  color: var(--color-white);
+  color: #185fa5;
+  border: 1px solid #185fa5;
+  background-color: transparent;
+  padding-top: 137px;
 }
 
 .btn-warning:hover {
-  background-color: var(--color-warning-hover);
+  background-color: #185fa5;
+  color: var(--color-white);
+}
+
+.btn-danger {
+  color: #ffffff;
+  font-weight: bold;
+  background-color: red;
+}
+
+.btn-danger:hover {
+  background-color: #a32d2d;
+  color: var(--color-white);
 }
 
 /* ===== TABLE ===== */
@@ -497,6 +502,7 @@ body {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid #ecf0f1;
+  vertical-align: middle;
 }
 
 .admin-table th {
@@ -521,11 +527,17 @@ body {
 }
 
 .table-actions button {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 4px;
+  padding: 5px 12px;
+  background: transparent;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 /* ===== EMPTY MESSAGE ===== */
