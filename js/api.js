@@ -1,8 +1,3 @@
-// ============================================
-// API.JS - All API calls in one file
-// ============================================
-
-// API URL never changes - use const
 const API_URL = "http://localhost:3000/books";
 
 // Function to get all books
