@@ -2,22 +2,18 @@
 // MAIN.JS - Homepage functionality
 // ============================================
 
-// These MUST be let because they get reassigned later
 let allBooks = [];
 let currentFilter = "all";
 
-// These are DOM elements - const is fine (we don't reassign the variable)
 const booksGrid = document.getElementById("booksGrid");
 const genreFilters = document.getElementById("genreFilters");
 const searchInput = document.getElementById("searchInput");
 const toReadCount = document.getElementById("toReadCount");
 
-// Run when page loads
 document.addEventListener("DOMContentLoaded", function () {
   loadBooks();
 });
 
-// Function to load and display books
 async function loadBooks() {
   allBooks = await getAllBooks();
   createGenreButtons(allBooks);
@@ -27,39 +23,35 @@ async function loadBooks() {
 
 // Function to create genre filter buttons
 function createGenreButtons(books) {
-  // Get unique genres
   let genres = [];
-  for (let i = 0; i < books.length; i++) {
-    if (!genres.includes(books[i].genre)) {
-      genres.push(books[i].genre);
+  books.forEach(function (book) {
+    if (!genres.includes(book.genre)) {
+      genres.push(book.genre);
     }
-  }
+  });
 
-  // Create button for each genre
-  for (let i = 0; i < genres.length; i++) {
+  genres.forEach(function (genre) {
     let btn = document.createElement("button");
     btn.className = "genre-btn";
-    btn.textContent = genres[i];
-    btn.setAttribute("data-genre", genres[i]);
+    btn.textContent = genre;
+    btn.setAttribute("data-genre", genre);
     btn.onclick = function () {
-      filterByGenre(genres[i], btn);
+      filterByGenre(genre, btn);
     };
     genreFilters.appendChild(btn);
-  }
+  });
 }
 
 // Function to filter books by genre
 function filterByGenre(genre, clickedBtn) {
   currentFilter = genre;
 
-  // Update active button style
   let buttons = genreFilters.querySelectorAll(".genre-btn");
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].classList.remove("active");
-  }
+  buttons.forEach(function (button) {
+    button.classList.remove("active");
+  });
   clickedBtn.classList.add("active");
 
-  // Filter and display
   let filtered = filterBooks(allBooks, searchInput.value);
   displayBooks(filtered);
 }
@@ -74,8 +66,7 @@ function displayBooks(books) {
     return;
   }
 
-  for (let i = 0; i < books.length; i++) {
-    let book = books[i];
+  books.forEach(function (book) {
     let card = document.createElement("div");
     card.className = "book-card";
     card.innerHTML = `
@@ -90,10 +81,9 @@ function displayBooks(books) {
       openModal(book.id);
     };
     booksGrid.appendChild(card);
-  }
+  });
 }
 
-// Search functionality
 searchInput.addEventListener("input", function () {
   let filtered = filterBooks(allBooks, searchInput.value);
   displayBooks(filtered);
@@ -104,8 +94,7 @@ function filterBooks(books, searchText) {
   let result = [];
   let text = searchText.toLowerCase();
 
-  for (let i = 0; i < books.length; i++) {
-    let book = books[i];
+  books.forEach(function (book) {
     let matchesSearch =
       book.title.toLowerCase().includes(text) ||
       book.author.toLowerCase().includes(text);
@@ -114,7 +103,7 @@ function filterBooks(books, searchText) {
     if (matchesSearch && matchesGenre) {
       result.push(book);
     }
-  }
+  });
 
   return result;
 }
@@ -122,10 +111,8 @@ function filterBooks(books, searchText) {
 // Function to update "To Read" counter
 function updateToReadCount(books) {
   let count = 0;
-  for (let i = 0; i < books.length; i++) {
-    if (books[i].toRead) {
-      count++;
-    }
-  }
+  books.forEach(function (book) {
+    if (book.toRead) count++;
+  });
   toReadCount.textContent = count;
 }

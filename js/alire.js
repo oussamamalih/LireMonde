@@ -2,12 +2,10 @@
 // ALIRE.JS - To Read list page
 // ============================================
 
-// DOM elements - const is fine
 const toReadList = document.getElementById("toReadList");
 const emptyMessage = document.getElementById("emptyMessage");
 const toReadCount = document.getElementById("toReadCount");
 
-// Run when page loads
 document.addEventListener("DOMContentLoaded", function () {
   loadToReadBooks();
 });
@@ -17,18 +15,17 @@ async function loadToReadBooks() {
   let books = await getAllBooks();
   let toReadBooks = [];
 
-  // Find only books with toRead = true
-  for (let i = 0; i < books.length; i++) {
-    if (books[i].toRead) {
-      toReadBooks.push(books[i]);
+  books.forEach(function (book) {
+    if (book.toRead) {
+      toReadBooks.push(book);
     }
-  }
+  });
 
   // Update counter
   let count = 0;
-  for (let i = 0; i < books.length; i++) {
-    if (books[i].toRead) count++;
-  }
+  books.forEach(function (book) {
+    if (book.toRead) count++;
+  });
   toReadCount.textContent = count;
 
   // Show empty message or books
@@ -46,8 +43,7 @@ async function loadToReadBooks() {
 function displayToReadBooks(books) {
   toReadList.innerHTML = "";
 
-  for (let i = 0; i < books.length; i++) {
-    let book = books[i];
+  books.forEach(function (book) {
     let card = document.createElement("div");
     card.className = "book-card";
     card.innerHTML = `
@@ -57,19 +53,19 @@ function displayToReadBooks(books) {
                 <div class="book-author">by ${book.author}</div>
                 <span class="book-genre">${book.genre}</span>
                 <br><br>
-                <button class="btn btn-danger" onclick="removeFromToRead(${book.id})">
+                <button class="btn btn-danger" onclick="removeFromToRead('${book.id}')">
                     Remove from List
                 </button>
             </div>
         `;
     toReadList.appendChild(card);
-  }
+  });
 }
 
 // Function to remove book from To Read
 async function removeFromToRead(id) {
-  let updated = await toggleToRead(id, true); // true because it's currently in list
+  let updated = await toggleToRead(id, true);
   if (updated) {
-    loadToReadBooks(); // Refresh the list
+    loadToReadBooks();
   }
 }
