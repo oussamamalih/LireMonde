@@ -16,7 +16,7 @@
       "genre": "Science Fiction",
       "description": "Set on the desert planet Arrakis, Dune is the story of Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding.",
       "cover": "images/Dune.jfif",
-      "toRead": true
+      "toRead": false
     },
     {
       "id": "3",
@@ -71,6 +71,15 @@
       "description": "The story of the fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan, of lavish parties on Long Island.",
       "cover": "images/great.jfif",
       "toRead": false
+    },
+    {
+      "title": "thfgdg",
+      "author": "fffff",
+      "genre": "Classic",
+      "cover": "https://template.canva.com/EAFihRgw0cI/2/0/1003w-pug7SdX02F8.jpg",
+      "description": "gujugujgh",
+      "toRead": false,
+      "id": "elcgN20yQL8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

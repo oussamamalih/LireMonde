@@ -465,9 +465,8 @@ body {
 }
 
 .btn-warning {
-  color: #185fa5;
-  border: 1px solid #185fa5;
-  background-color: transparent;
+  color: var(--color-danger)
+  background-color: var(--color-secondary);
   padding-top: 137px;
 }
 
@@ -528,7 +527,7 @@ body {
 
 .table-actions button {
   padding: 5px 12px;
-  background: transparent;
+  background-color: var(--color-accent);
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
@@ -550,6 +549,14 @@ body {
 .empty-message p {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
+}
+
+.page-header h1{
+  text-align: center;
+
+}
+.page-header p{
+  text-align: center;
 }
 
 /* ===== FOOTER ===== */

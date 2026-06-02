@@ -39,7 +39,7 @@ bookForm.addEventListener("submit", async function (event) {
 
   if (isEditing) {
     // Update existing book
-    let id = parseInt(bookIdInput.value);
+    let id = bookIdInput.value;
     let updated = await updateBook(id, bookData);
     if (updated) {
       resetForm();
@@ -67,22 +67,23 @@ async function loadBooksTable() {
   let books = await getAllBooks();
   tableBody.innerHTML = "";
 
-  for (let i = 0; i < books.length; i++) {
-    let book = books[i];
+  books.forEach((book) => {
     let row = document.createElement("tr");
+
     row.innerHTML = `
-            <td>${book.id}</td>
-            <td><img src="${book.cover}" alt="${book.title}"></td>
-            <td>${book.title}</td>
-            <td>${book.author}</td>
-            <td>${book.genre}</td>
-            <td class="table-actions">
-                <button class="btn-warning" onclick="editBook(${book.id})">Edit</button>
-                <button class="btn-danger" onclick="deleteBookById(${book.id})">Delete</button>
-            </td>
-        `;
+    <td>${book.id}</td>
+    <td><img src="${book.cover}" alt="${book.title}"></td>
+    <td>${book.title}</td>
+    <td>${book.author}</td>
+    <td>${book.genre}</td>
+    <td class="table-actions">
+      <button class="btn-warning" onclick="editBook('${book.id}')">Edit</button>
+      <button class="btn-danger" onclick="deleteBookById('${book.id}')">Delete</button>
+    </td>
+  `;
+
     tableBody.appendChild(row);
-  }
+  });
 }
 
 // Function to fill form for editing
