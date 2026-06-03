@@ -1,7 +1,3 @@
-// ============================================
-// MAIN.JS - Homepage functionality
-// ============================================
-
 let allBooks = [];
 let currentFilter = "all";
 

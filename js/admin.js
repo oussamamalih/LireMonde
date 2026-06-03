@@ -1,8 +1,6 @@
-// ============================================
-// ADMIN.JS - Admin dashboard functionality
-// ============================================
 
-// DOM elements - const is fine (we don't reassign these variables)
+
+// DOM elements 
 const bookForm = document.getElementById("bookForm");
 const formTitle = document.getElementById("formTitle");
 const bookIdInput = document.getElementById("bookId");
@@ -15,7 +13,6 @@ const submitBtn = document.getElementById("submitBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const tableBody = document.getElementById("tableBody");
 
-// MUST be let - toggles between true and false
 let isEditing = false;
 
 // Run when page loads

@@ -1,8 +1,4 @@
-// ============================================
-// MODAL.JS - Book details modal
-// ============================================
-
-// DOM elements - const is fine
+// DOM elements
 const modal = document.getElementById("bookModal");
 const modalBody = document.getElementById("modalBody");
 const closeBtn = document.querySelector(".close-btn");

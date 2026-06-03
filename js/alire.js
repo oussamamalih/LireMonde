@@ -1,7 +1,3 @@
-// ============================================
-// ALIRE.JS - To Read list page
-// ============================================
-
 const toReadList = document.getElementById("toReadList");
 const emptyMessage = document.getElementById("emptyMessage");
 const toReadCount = document.getElementById("toReadCount");
